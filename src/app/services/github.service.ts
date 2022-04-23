@@ -7,7 +7,7 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class GithubService {
-  ACCESS_TOKEN: string = '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'
+  ACCESS_TOKEN: string = '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'
 
   headers: HttpHeaders = new HttpHeaders()
 
