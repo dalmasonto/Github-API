@@ -1,0 +1,55 @@
+<ng-container *ngIf="users.length === 0">
+  <div class="container py-4">
+    <h4 class="text-center">No Users Found</h4>
+  </div>
+</ng-container>
+<ng-container *ngIf="users.length > 0">
+  <nav aria-label="Page navigation bg-transparent">
+    <ul class="pagination flex-wrap">
+      <li class="page-item" (click)="previousPage()">
+        <span aria-hidden="true">&laquo;</span>
+      </li>
+      <li class="page-item " *ngFor="let i of counter(page_count); let n = index" (click)="paginate(n + 1)"
+        [ngClass]="current_page === n + 1 ? 'active' : '' ">
+        {{n + 1}}
+      </li>
+      <li class="page-item" (click)="nextPage()">
+        <span aria-hidden="true">&raquo;</span>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="row">
+    <div class="col-6 mb-2" *ngFor="let stargazer of users_to_show">
+      <a routerLink="/github/users/{{stargazer.login}}" class="custom-link d-block">
+        <div class="d-flex align-items-center">
+          <div class="contributor-icon">
+            <img [src]="stargazer.avatar_url" loading="lazy" alt="{{stargazer.login}}" class="rounded-circle" width="40"
+              height="40">
+          </div>
+          <span class="text-capitalize ms-2">
+
+            {{stargazer.login}}
+
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <nav aria-label="Page navigation bg-transparent">
+    <ul class="pagination flex-wrap">
+      <li class="page-item" (click)="previousPage()">
+        <span aria-hidden="true">&laquo;</span>
+      </li>
+      <li class="page-item " *ngFor="let i of counter(page_count); let n = index" (click)="paginate(n + 1)"
+        [ngClass]="current_page === n + 1 ? 'active' : '' ">
+        {{n + 1}}
+      </li>
+      <li class="page-item" (click)="nextPage()">
+        <span aria-hidden="true">&raquo;</span>
+      </li>
+    </ul>
+  </nav>
+
+</ng-container>

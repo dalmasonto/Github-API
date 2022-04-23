@@ -1,0 +1,23 @@
+.hero-section{
+    --h1-size: 72px;
+    --p-size: 22px;
+    h1{
+        font-size: var(--h1-size);
+        color: var(--color);
+
+    }
+    .hero-description p{
+        color: var(--color);
+        font-size: var(--p-size);
+        margin-bottom: 30px;
+    }
+
+    .avatar{
+        overflow: hidden;
+    }
+
+    .avatar img{
+        width: 100%;
+        height: auto;
+    }
+}

@@ -1,0 +1,126 @@
+<div class="">
+  <div class="card custom-card" style="border-radius: 0;">
+    <div class="container  py-5">
+      <h1 class="display-4 text-center">About</h1>
+      <p class="lead text-center">Know who us</p>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card custom-card p-2 p-md-4 mb-3">
+        <h2>About Developer</h2>
+        <p class="about-desc">
+          The developer of this project is a nice enthusiastic person.
+          He is a student of the Multimedia University.
+        </p>
+        <p class="about-desc">
+          A self taught pro-grammer with a passion for web development and software development in general.
+        </p>
+        <p class="about-desc">
+          He has done several web projects and he is currently working on a project called "My PMS".
+          <br>
+          This project is a personal project management system.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card custom-card p-2 p-md-4">
+        <h2>About Project</h2>
+
+        <p class="about-desc">
+          "My GitHub Clone Project" is a clone of the GitHub website. It is a personal project.
+        </p>
+
+        <p class="about-desc">
+          It is really not like GitHub as it lacks functionality. It is just a clone of the GitHub website.
+        </p>
+
+        <p class="about-desc">
+          It displays projects of various users and also displays users' information based on the <a
+            href="https://docs.github.com/en/rest" class="custom-link" style="color: var(--primary-color);">GitHub rest
+            API</a>
+        </p>
+
+        <p class="about-desc">
+          It is developed using <a href="https://angular.io" class="custom-link"
+            style="color: var(--primary-color);">Angular</a>
+          and <a href="https://www.npmjs.com" class="custom-link" style="color: var(--primary-color);">NPM</a>.
+          <a href="https://getbootstrap.com" class="custom-link" style="color: var(--primary-color);">Bootstrap 5</a>
+          for CSS.
+        </p>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="container py-4">
+  <div class="row mb-4">
+    <div class="col-md-4  offset-md-4">
+      <div>
+        <div class="card custom-card px-3 py-4">
+          <h4 class="text-center mb-3">Dalmas Ogembo</h4>
+          <div class="stat mx-auto">
+            <div class="icon icon-img">
+              <img src="/assets/bg2.jpg" alt="">
+            </div>
+          </div>
+          <div class="more mt-3">
+            <h4>Socials</h4>
+            <div class="row">
+              <div class="col-md-6" *ngFor="let social of socials">
+                <div class="social-media mb-2">
+                  <span>
+                    <i class="{{social.icon}} me-2"></i>
+                  </span>
+                  <span>
+                    {{social.title}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div>
+        <div class="card custom-card px-3 py-4">
+          <h2 class="text-center mb-3">Company</h2>
+          <h4 class="text-center mb-3">LIVE Software Developer</h4>
+          <div class="stat mx-auto">
+            <div class="icon icon-img">
+              <img src="/assets/bg2.jpg" alt="">
+            </div>
+          </div>
+          <div class="more mt-3">
+            <h4>Socials</h4>
+            <div class="row">
+              <div class="col-md-6" *ngFor="let social of company_socials">
+                <div class="social-media mb-2">
+                  <span>
+                    <i class="{{social.icon}} me-2"></i>
+                  </span>
+                  <span>
+                    {{social.title}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

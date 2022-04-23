@@ -1,0 +1,10 @@
+.pagination{
+  .page-item{
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .page-item:hover, .page-item.active{
+    background-color: var(--select-bg);
+  }
+}

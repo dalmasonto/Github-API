@@ -1,0 +1,11 @@
+.custom-navbar{
+    background-color: var(--select-bg);
+    color: white;
+    .nav-link{
+        color: white;
+        font-weight: 500;
+    }
+    .active{
+        color: var(--primary-color) !important;
+    }
+}

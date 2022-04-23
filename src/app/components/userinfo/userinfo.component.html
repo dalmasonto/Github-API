@@ -1,0 +1,63 @@
+<div>
+  <div class="card custom-card p-2 py-3">
+    <div class="user-header d-flex justify-content-center">
+      <div class="stat">
+        <div class="icon icon-img">
+          <img src="{{owner.avatar_url}}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="user-body mt-3">
+      <p class="mb-2">
+        <a routerLink="/github/users/{{owner.login}}" class="d-block text-center custom-link mb-2 ">
+          <i class="fas fa-eye me-2"></i>
+          <span>View User Profile</span>
+        </a>
+        <a href="https://anon.ws?{{owner.html_url}}" class="d-block custom-link text-center mb-2" target="_blank"
+          referrerpolicy="nofollow noopener" refferer="nofollow noopener">
+          <i class="fas fa-user me-2"></i>
+          <span>
+            {{owner.login}}
+          </span>
+          <i class="fas fa-external-link ms-2"></i>
+        </a>
+      </p>
+      <h4 class="text-center my-2">{{owner.name}}</h4>
+      <div class="user-details">
+
+        <div class="row mb-2" *ngFor="let stat of owner.getStats()">
+          <div class="col-6">
+            <a href="{{stat?.url}}" class="d-block custom-link" target="_blank" referrerpolicy="nofollow noopener"
+              refferer="nofollow noopener">
+              <i class="fas fa-angle-right me-2"></i>
+              <span>
+                {{stat.title}}
+              </span>
+              <i class="fas fa-external-link ms-2"></i>
+            </a>
+          </div>
+          <div class="col-6">
+            {{stat.value}}
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row mb-2" *ngFor="let info of owner.getMoreInfo()">
+          <div class="col-4">
+            <div class="d-block custom-link">
+              <i class="{{info.icon}} me-2"></i>
+              <span>
+                {{info.title}}
+              </span>
+            </div>
+          </div>
+          <div class="col-8">
+            {{info.value}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

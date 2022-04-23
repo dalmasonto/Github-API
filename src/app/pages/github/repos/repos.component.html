@@ -1,0 +1,87 @@
+<div class="">
+  <div class="card custom-card" style="border-radius: 0;">
+    <div class="container  py-5">
+      <h1 class="text-center">Search GitHub Repositories</h1>
+      <div class="d-flex justify-content-center mt-4">
+        <div class="d-flex justify-content-center">
+          <form class="d-flex">
+            <input
+              class="custom-input form-control form-control-lg me-2 shadow-none bg-transparent text-white border border-white"
+              type="search" placeholder="Search Repos" name="searchTerm" [(ngModel)]="searchTerm">
+            <button class="btn btn-outline-white border border-white shadow-none" type="submit" (click)="search()">
+              <i class="fas fa-search text-white"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-4">
+  <ng-container *ngIf="loading">
+    <app-loader></app-loader>
+  </ng-container>
+
+  <ng-container *ngIf="showResults">
+    <div>
+      <h1 class="">Found Repos</h1>
+      <div>
+
+        <ng-container *ngIf="repos.length === 0">
+          <div class="container py-5">
+            <h1 class="text-center">No Repos Found</h1>
+          </div>
+        </ng-container>
+        <div class="row my-5">
+
+          <div *ngFor="let repo of repos" class="col-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+            <div class="card custom-card px-4 py-4">
+              <div class="c-body">
+                <a class="custom-link" routerLink="/github/repositories/{{repo.owner.login}}/{{repo.name}}">
+                  <h4 class="text-capitalize">{{repo.name}}</h4>
+                </a>
+                <p class="mb-1">
+                  <i class="fa-solid fa-calendar me-3"></i>
+                  <span>
+                    {{repo.created_at | date}}
+                  </span>
+                </p>
+                <p>
+                  <i class="fa-solid fa-user me-3"></i>
+                  <a routerLink="/github/users/{{repo.owner.login}}" class="custom-link">
+                    <span>
+                      {{repo.owner.login}}
+                    </span>
+                  </a>
+                </p>
+              </div>
+              <div class="c-footer d-flex">
+                <div class="">
+                  <a class="custom-link" href="{{repo.html_url}}" target="__blank" referrerpolicy="noreferrer">
+                    <span class="me-3">
+                      View on Git
+                    </span>
+                    <span>
+                      <i class="fa fars fa-external-link me-4"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="ms-auto">
+                  <span>
+                    <i class="fa fab fa-git me-4"></i>
+                  </span>
+                  <span>
+                    <i class="fa fa-solid fa-code-fork me-2"></i>
+                    {{repo.forks}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

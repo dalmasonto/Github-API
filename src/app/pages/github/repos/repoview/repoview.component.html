@@ -1,0 +1,227 @@
+<ng-container *ngIf="loadingRepo">
+  <app-loader></app-loader>
+</ng-container>
+<ng-container *ngIf="!repo && !loadingRepo">
+  <div class="container py-5">
+    <h1 class="text-center">Repository not found</h1>
+  </div>
+</ng-container>
+<!-- *ngIf="repo" -->
+<ng-container *ngIf="repo">
+  <div class="container-fluid py-4">
+    <div class="row">
+
+      <div class="col-12 col-md-4 mb-3 order-3">
+        <ng-container *ngIf="loadingOwner">
+          <app-loader></app-loader>
+        </ng-container>
+        <ng-container *ngIf="!loadingOwner">
+          <app-userinfo [owner]="repo.owner"></app-userinfo>
+        </ng-container>
+      </div>
+
+      <div class="col-12 col-md-5 mb-3 order-2">
+        <div>
+
+          <!-- Repo description section -->
+          <div class="mb-3">
+            <div class="card custom-card p-2">
+              <h4>
+                <i class="fas fa-edit"></i>
+                Repository Description
+              </h4>
+              <p>
+                {{repo.description}}
+              </p>
+            </div>
+          </div>
+
+          <!-- Cloning repo section -->
+          <div class="mb-3">
+            <div class="card custom-card p-2">
+              <h4>
+                <i class="far fa-clone"></i>
+                Clone Repository
+              </h4>
+
+
+              <div class="tabs mb-2">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" (click)="activeTab = 'https'" [ngClass]="activeTab === 'https' ? 'active' : ''">
+                    <span>HTTPS</span>
+                  </li>
+                  <li class="nav-item" (click)="activeTab = 'ssh'" [ngClass]="activeTab === 'ssh' ? 'active' : ''">
+                    <span>SSH</span>
+                  </li>
+                  <li class="nav-item" (click)="activeTab = 'gh'" [ngClass]="activeTab === 'gh' ? 'active' : ''">
+                    <span>Github CLI</span>
+                  </li>
+                </ul>
+
+              </div>
+
+              <ng-container [ngSwitch]="activeTab">
+                <div *ngSwitchCase="'https'" class="custom-card p-2 custom-code" #cont>
+                  git clone {{repo.clone_url}}
+                  <span class="clone-icon" ngxClipboard cbContent="git clone {{repo.clone_url}}" [container]="cont">
+                    <i class="far fa-clone"></i>
+                  </span>
+                </div>
+                <div *ngSwitchCase="'ssh'" class="custom-card p-2 pe-5 custom-code" #cont>
+                  <p class="pe-5 mb-0 p-0">
+                    git clone {{repo.ssh_url}}
+                  </p>
+                  <span class="clone-icon" ngxClipboard cbContent="git clone {{repo.clone_url}}" [container]="cont">
+                    <i class="far fa-clone"></i>
+                  </span>
+                </div>
+                <div *ngSwitchCase="'gh'" class="custom-card p-2 pe-5 custom-code" #cont>
+                  <p class="pe-5 mb-0 p-0">
+                    gh repo clone {{repo.full_name}}
+                  </p>
+                  <span class="clone-icon" ngxClipboard cbContent="git clone {{repo.clone_url}}" [container]="cont">
+                    <i class="far fa-clone"></i>
+                  </span>
+                </div>
+                <div *ngSwitchDefault class="custom-card p-2 custom-code" #cont>
+                  <p class="pe-5 mb-0 p-0">
+                    git clone {{repo.clone_url}}
+                  </p>
+                  <span class="clone-icon" ngxClipboard cbContent="git clone {{repo.clone_url}}" [container]="cont">
+                    <i class="far fa-clone"></i>
+                  </span>
+                </div>
+              </ng-container>
+
+            </div>
+          </div>
+
+          <!-- Repo languages section -->
+          <div class="mb-3">
+            <div class="card custom-card p-2">
+              <h4>
+                <i class="fas fa-language"></i>
+                Languages
+              </h4>
+              <ng-container *ngIf="loadingLanguages">
+                <app-loader></app-loader>
+              </ng-container>
+              <ng-container *ngIf="repoLanguages">
+                <div class="row">
+                  <div class="col-6 mb-2" *ngFor="let lang of repoLanguages">
+                    <div class="d-flex justify-content-between">
+                      <span>
+                        <i class="fas fa-check me-2"></i>
+                        {{lang.name}}
+                      </span>
+                      <span>{{lang.value}}%</span>
+                    </div>
+                  </div>
+
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <!-- Repo contributors section -->
+          <div class="mb-3">
+            <div class="card custom-card p-2">
+              <h4>
+                <i class="fas fa-users"></i>
+                Contributors
+              </h4>
+              <ng-container *ngIf="loadingContributors">
+                <app-loader></app-loader>
+              </ng-container>
+              <ng-container *ngIf="contributors">
+                <app-userpaginator [users]="contributors"></app-userpaginator>
+              </ng-container>
+            </div>
+          </div>
+
+          <!-- Repo stargazers section -->
+          <div class="mb-3">
+            <div class="card custom-card p-2">
+              <h4>
+                <i class="far fa-star"></i>
+                Stargazers
+              </h4>
+              <ng-container *ngIf="loadingStargazers">
+                <app-loader></app-loader>
+              </ng-container>
+              <ng-container *ngIf="stargazers">
+                <app-userpaginator [users]="stargazers"></app-userpaginator>
+              </ng-container>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 order-1">
+        <div>
+
+          <div class="card custom-card p-2 py-3">
+            <h4 class="text-center text-capitalize">
+              {{repo.name}}
+            </h4>
+
+            <p class="text-center">
+              <a href="https://anon.ws?{{repo.html_url}}" class="d-block custom-link" target="_blank"
+                referrerpolicy="nofollow noopener" refferer="nofollow noopener">
+                <i class="fab fa-git me-2"></i>
+                <span>
+                  {{repo.full_name}}
+                </span>
+                <i class="fas fa-external-link ms-2"></i>
+              </a>
+            </p>
+
+            <div class="repo-stats">
+
+              <div class="row mb-2" *ngFor="let stat of repo.getStats()">
+                <div class="col-6">
+                  <a href="{{stat?.url}}" class="d-block custom-link" target="_blank" referrerpolicy="nofollow noopener"
+                    refferer="nofollow noopener">
+                    <i class="fas fa-angle-right me-2"></i>
+                    <span>
+                      {{stat.title}}
+                    </span>
+                    <i class="fas fa-external-link ms-2"></i>
+                  </a>
+                </div>
+                <div class="col-6">
+                  {{stat.value}}
+                </div>
+              </div>
+
+            </div>
+
+            <hr class="my-4">
+
+            <div class="repo-more-info">
+
+              <div class="row mb-2" *ngFor="let info of repo.getMoreInfo()">
+                <div class="col-4">
+                  <div class="d-block custom-link">
+                    <i class="{{info.icon}} me-2"></i>
+                    <span>
+                      {{info.title}}
+                    </span>
+                  </div>
+                </div>
+                <div class="col-8">
+                  {{info.value}}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
